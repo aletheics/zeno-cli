@@ -14,6 +14,6 @@ function loadNodeOs(): typeof NodeOs | null {
 // Keep runtime OS loading browser-safe. A top-level runtime import of node:os breaks browser/Vite builds.
 const nodeOs = loadNodeOs();
 
-export function getPiUserAgent(): string {
+export function getZenoUserAgent(): string {
 	return nodeOs ? `zeno (${nodeOs.platform()} ${nodeOs.release()}; ${nodeOs.arch()})` : "zeno (browser)";
 }
