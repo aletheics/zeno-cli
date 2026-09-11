@@ -25,30 +25,30 @@ import {
 } from "vitest-evals/harness";
 import { PI_SESSION_SNAPSHOT_ARTIFACT } from "./vitest-evals/artifacts.ts";
 
-export type PiCodingAgentInput = string | Array<{ type: "prompt"; content: string } | { type: "reload" }>;
+export type ZenoCodingAgentInput = string | Array<{ type: "prompt"; content: string } | { type: "reload" }>;
 
-type PiCodingAgentModelSelection = {
+type ZenoCodingAgentModelSelection = {
 	provider: string;
 	id: string;
 };
 
-type PiCodingAgentHarnessOptions = {
+type ZenoCodingAgentHarnessOptions = {
 	name?: string;
-	model?: PiCodingAgentModelSelection;
+	model?: ZenoCodingAgentModelSelection;
 	noTools?: CreateAgentSessionOptions["noTools"];
 	tools?: CreateAgentSessionOptions["tools"];
 	customTools?: CreateAgentSessionOptions["customTools"];
 	transformSystemPrompt?: (defaultPrompt: string) => string;
 };
 
-type PiCodingAgentHarnessWithOutput<TOutput extends JsonValue> = PiCodingAgentHarnessOptions & {
+type ZenoCodingAgentHarnessWithOutput<TOutput extends JsonValue> = ZenoCodingAgentHarnessOptions & {
 	output: (args: { response: string; session: AgentSession }) => TOutput | Promise<TOutput>;
 };
 
 export function resolveModelSelection(
-	explicitModel: PiCodingAgentModelSelection | undefined,
+	explicitModel: ZenoCodingAgentModelSelection | undefined,
 	environment: { PI_PROVIDER?: string; PI_MODEL?: string } = process.env,
-): PiCodingAgentModelSelection {
+): ZenoCodingAgentModelSelection {
 	const provider = (explicitModel?.provider ?? environment.PI_PROVIDER)?.trim();
 	const id = (explicitModel?.id ?? environment.PI_MODEL)?.trim();
 	if (!provider || !id) {
@@ -108,11 +108,11 @@ async function promptAgent(session: AgentSession, input: string, signal: AbortSi
 	return output ?? "";
 }
 
-async function runPiCodingAgent<TOutput extends JsonValue>(
-	input: PiCodingAgentInput,
+async function runZenoCodingAgent<TOutput extends JsonValue>(
+	input: ZenoCodingAgentInput,
 	signal: AbortSignal | undefined,
 	setArtifact: HarnessContext["setArtifact"],
-	options: PiCodingAgentHarnessOptions | PiCodingAgentHarnessWithOutput<TOutput>,
+	options: ZenoCodingAgentHarnessOptions | ZenoCodingAgentHarnessWithOutput<TOutput>,
 ): Promise<SimpleHarnessResult<string | TOutput>> {
 	const startedAt = performance.now();
 	signal?.throwIfAborted();
@@ -247,15 +247,17 @@ async function runPiCodingAgent<TOutput extends JsonValue>(
 	};
 }
 
-export function createPiCodingAgentHarness<TOutput extends JsonValue>(
-	options: PiCodingAgentHarnessWithOutput<TOutput>,
-): Harness<PiCodingAgentInput, TOutput>;
-export function createPiCodingAgentHarness(options?: PiCodingAgentHarnessOptions): Harness<PiCodingAgentInput, string>;
-export function createPiCodingAgentHarness<TOutput extends JsonValue>(
-	options: PiCodingAgentHarnessOptions | PiCodingAgentHarnessWithOutput<TOutput> = {},
+export function createZenoCodingAgentHarness<TOutput extends JsonValue>(
+	options: ZenoCodingAgentHarnessWithOutput<TOutput>,
+): Harness<ZenoCodingAgentInput, TOutput>;
+export function createZenoCodingAgentHarness(
+	options?: ZenoCodingAgentHarnessOptions,
+): Harness<ZenoCodingAgentInput, string>;
+export function createZenoCodingAgentHarness<TOutput extends JsonValue>(
+	options: ZenoCodingAgentHarnessOptions | ZenoCodingAgentHarnessWithOutput<TOutput> = {},
 ) {
-	return createHarness<PiCodingAgentInput, string | TOutput>({
+	return createHarness<ZenoCodingAgentInput, string | TOutput>({
 		name: options.name ?? "pi-coding-agent",
-		run: ({ input, signal, setArtifact }) => runPiCodingAgent(input, signal, setArtifact, options),
+		run: ({ input, signal, setArtifact }) => runZenoCodingAgent(input, signal, setArtifact, options),
 	});
 }

@@ -2,9 +2,9 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect } from "vitest";
 import { createJudge, describeEval } from "vitest-evals";
-import { createPiCodingAgentHarness, type PiCodingAgentInput } from "./pi-harness.ts";
 import { recordEvalSourceArtifact } from "./vitest-evals/artifacts.ts";
 import { evalHarnessTable } from "./vitest-evals/harness-table.ts";
+import { createZenoCodingAgentHarness, type ZenoCodingAgentInput } from "./zeno-harness.ts";
 
 type ExtensionAuthoringOutput = {
 	response: string;
@@ -16,7 +16,7 @@ type ExtensionAuthoringOutput = {
 };
 
 function createExtensionAuthoringHarness(name: string, transformSystemPrompt?: (defaultPrompt: string) => string) {
-	return createPiCodingAgentHarness({
+	return createZenoCodingAgentHarness({
 		name,
 		...(transformSystemPrompt ? { transformSystemPrompt } : {}),
 		output: ({ response, session }) => {
@@ -50,7 +50,7 @@ function prepareDefaultPromptOverride(defaultPrompt: string): string {
 	return defaultPrompt.slice(0, cwdStart);
 }
 
-const ExtensionAuthoringJudge = createJudge<PiCodingAgentInput, ExtensionAuthoringOutput>(
+const ExtensionAuthoringJudge = createJudge<ZenoCodingAgentInput, ExtensionAuthoringOutput>(
 	"ExtensionAuthoringJudge",
 	({ output, toolCalls }) => {
 		const failures: string[] = [];

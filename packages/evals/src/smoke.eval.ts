@@ -1,10 +1,10 @@
 import { expect } from "vitest";
 import { describeEval } from "vitest-evals";
-import { createPiCodingAgentHarness } from "./pi-harness.ts";
+import { createZenoCodingAgentHarness } from "./zeno-harness.ts";
 
-const piCodingAgentHarness = createPiCodingAgentHarness({ noTools: "all" });
+const zenoCodingAgentHarness = createZenoCodingAgentHarness({ noTools: "all" });
 
-describeEval("Zeno Coding Agent smoke", { harness: piCodingAgentHarness }, (it) => {
+describeEval("Zeno Coding Agent smoke", { harness: zenoCodingAgentHarness }, (it) => {
 	it("runs a basic prompt end to end", async ({ run }) => {
 		const result = await run("What's the capital of France? Respond with only the city name.");
 

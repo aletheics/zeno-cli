@@ -4,7 +4,7 @@ import { Type } from "@aletheics/zeno-ai";
 import { defineTool } from "@aletheics/zeno-coding-agent";
 import { expect } from "vitest";
 import { describeEval, toolCalls } from "vitest-evals";
-import { createPiCodingAgentHarness } from "./pi-harness.ts";
+import { createZenoCodingAgentHarness } from "./zeno-harness.ts";
 
 const SUBMIT_AUDIT_TOOL_NAME = "submit_documentation_audit";
 const submitDocumentationAuditTool = defineTool({
@@ -37,7 +37,7 @@ const documentationPages = globSync("**/*.md", { cwd: docsRoot })
 	.map((path) => path.replaceAll("\\", "/"))
 	.sort()
 	.map((path) => ({ path }));
-const documentationAuditHarness = createPiCodingAgentHarness({
+const documentationAuditHarness = createZenoCodingAgentHarness({
 	name: "documentation-page-audit",
 	tools: ["read", "grep", "find", "ls", SUBMIT_AUDIT_TOOL_NAME],
 	customTools: [submitDocumentationAuditTool],

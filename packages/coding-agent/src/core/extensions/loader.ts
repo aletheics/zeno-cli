@@ -24,7 +24,7 @@ import * as _bundledTypeboxValue from "typebox/value";
 import { CONFIG_DIR_NAME, getAgentDir, isBunBinary, isBundledNode } from "../../config.ts";
 // NOTE: This import works because loader.ts exports are NOT re-exported from index.ts,
 // avoiding a circular dependency. Extensions can import from @aletheics/zeno-coding-agent.
-import * as _bundledPiCodingAgent from "../../index.ts";
+import * as _bundledZenoCodingAgent from "../../index.ts";
 import { resolvePath } from "../../utils/paths.ts";
 import { createEventBus, type EventBus } from "../event-bus.ts";
 import type { ExecOptions } from "../exec.ts";
@@ -63,14 +63,14 @@ const VIRTUAL_MODULES: Record<string, unknown> = {
 	"@aletheics/zeno-ai/compat": _bundledPiAiCompat,
 	"@aletheics/zeno-ai/oauth": _bundledPiAiOauth,
 	"@aletheics/zeno-ai/providers/all": _bundledPiAiProviders,
-	"@aletheics/zeno-coding-agent": _bundledPiCodingAgent,
+	"@aletheics/zeno-coding-agent": _bundledZenoCodingAgent,
 	"@mariozechner/pi-agent-core": _bundledPiAgentCore,
 	"@mariozechner/pi-tui": _bundledPiTui,
 	"@mariozechner/pi-ai": _bundledPiAiCompat,
 	"@mariozechner/pi-ai/compat": _bundledPiAiCompat,
 	"@mariozechner/pi-ai/oauth": _bundledPiAiOauth,
 	"@mariozechner/pi-ai/providers/all": _bundledPiAiProviders,
-	"@mariozechner/pi-coding-agent": _bundledPiCodingAgent,
+	"@mariozechner/pi-coding-agent": _bundledZenoCodingAgent,
 };
 
 const require = createRequire(import.meta.url);
@@ -105,7 +105,7 @@ function getAliases(): Record<string, string> {
 		return fileURLToPath(import.meta.resolve(specifier));
 	};
 
-	const piCodingAgentEntry = packageIndex;
+	const zenoCodingAgentEntry = packageIndex;
 	const piAgentCoreEntry = resolveWorkspaceOrImport("agent/dist/index.js", "@aletheics/zeno-agent-core");
 	const piTuiEntry = resolveWorkspaceOrImport("tui/dist/index.js", "@aletheics/zeno-tui");
 	// Extensions resolve the pi-ai root to the compat entrypoint (a strict
@@ -116,14 +116,14 @@ function getAliases(): Record<string, string> {
 	const piAiProvidersEntry = resolveWorkspaceOrImport("ai/dist/providers/all.js", "@aletheics/zeno-ai/providers/all");
 
 	_aliases = {
-		"@aletheics/zeno-coding-agent": piCodingAgentEntry,
+		"@aletheics/zeno-coding-agent": zenoCodingAgentEntry,
 		"@aletheics/zeno-agent-core": piAgentCoreEntry,
 		"@aletheics/zeno-tui": piTuiEntry,
 		"@aletheics/zeno-ai/providers/all": piAiProvidersEntry,
 		"@aletheics/zeno-ai/compat": piAiCompatEntry,
 		"@aletheics/zeno-ai/oauth": piAiOauthEntry,
 		"@aletheics/zeno-ai": piAiCompatEntry,
-		"@mariozechner/pi-coding-agent": piCodingAgentEntry,
+		"@mariozechner/pi-coding-agent": zenoCodingAgentEntry,
 		"@mariozechner/pi-agent-core": piAgentCoreEntry,
 		"@mariozechner/pi-tui": piTuiEntry,
 		"@mariozechner/pi-ai/providers/all": piAiProvidersEntry,

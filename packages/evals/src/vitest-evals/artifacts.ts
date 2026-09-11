@@ -15,7 +15,7 @@ export const PI_SESSION_SNAPSHOT_ARTIFACT = "piSessionJsonl";
 const evalSessionArtifactKey = Symbol("pi-evals-session-artifact");
 const evalSourceArtifactKey = Symbol("pi-evals-source-artifact");
 
-interface PiSessionAttachment extends TestAttachment {
+interface ZenoSessionAttachment extends TestAttachment {
 	name: "session.jsonl";
 	contentType: "application/jsonl";
 	body: string;
@@ -29,10 +29,10 @@ export interface SourceAttachment extends TestAttachment {
 	bodyEncoding: "utf-8";
 }
 
-interface PiSessionArtifact extends TestArtifactBase {
+interface ZenoSessionArtifact extends TestArtifactBase {
 	type: "@aletheics/zeno-evals:session";
 	runId: string;
-	attachments: [PiSessionAttachment] | [];
+	attachments: [ZenoSessionAttachment] | [];
 }
 
 interface SourceArtifact extends TestArtifactBase {
@@ -43,7 +43,7 @@ interface SourceArtifact extends TestArtifactBase {
 
 declare module "vitest" {
 	interface TestArtifactRegistry {
-		[evalSessionArtifactKey]: PiSessionArtifact;
+		[evalSessionArtifactKey]: ZenoSessionArtifact;
 		[evalSourceArtifactKey]: SourceArtifact;
 	}
 }
