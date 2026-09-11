@@ -1,0 +1,10 @@
+{
+	"name": "@aletheics/zeno-example-plugin",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"peerDependencies": {
+		"@aletheics/chord": "^0.84.4",
+		"@aletheics/zeno-coding-agent": "^0.84.4"
+	}
+}

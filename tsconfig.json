@@ -1,0 +1,52 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"paths": {
+			"*": ["./*"],
+			"@aletheics/chord": ["./packages/chord/src/index.ts"],
+			"@aletheics/chord/bundler": ["./packages/chord/src/bundler.ts"],
+			"@aletheics/chord/context": ["./packages/chord/src/context/index.ts"],
+			"@aletheics/chord/delta": ["./packages/chord/src/delta/index.ts"],
+			"@aletheics/chord/node": ["./packages/chord/src/node.ts"],
+			"@aletheics/zeno-telemetry": ["./packages/telemetry/src/index.ts"],
+			"@aletheics/zeno-telemetry/testing": ["./packages/telemetry/src/testing/index.ts"],
+			"@aletheics/zeno-ai": ["./packages/ai/src/index.ts"],
+			"@aletheics/zeno-ai/oauth": ["./packages/ai/src/oauth.ts"],
+			"@aletheics/zeno-ai/*": ["./packages/ai/src/*.ts", "./packages/ai/src/providers/*.ts"],
+			"@aletheics/zeno-ai/dist/*": ["./packages/ai/src/*"],
+			"@aletheics/zeno-agent-core": ["./packages/agent/src/index.ts"],
+			"@aletheics/zeno-agent-core/harness/session/testing": [
+				"./packages/agent/src/harness/session/testing/index.ts"
+			],
+			"@aletheics/zeno-agent-core/node": ["./packages/agent/src/node.ts"],
+			"@aletheics/zeno-agent-core/*": [
+				"./packages/agent/src/*.ts",
+				"./packages/agent/src/*/index.ts",
+				"./packages/agent/src/*"
+			],
+			"@aletheics/zeno-session-backend-sqlite-node": ["./packages/session-backends/sqlite-node/src/index.ts"],
+			"@aletheics/zeno-coding-agent": ["./packages/coding-agent/src/index.ts"],
+			"@aletheics/zeno-coding-agent/experimental/plugin": [
+				"./packages/coding-agent/src/experimental/plugin.ts"
+			],
+			"@aletheics/zeno-coding-agent/hooks": ["./packages/coding-agent/src/core/hooks/index.ts"],
+			"@aletheics/zeno-coding-agent/*": ["./packages/coding-agent/src/*"],
+			"@aletheics/zeno-protocol": ["./packages/protocol/src/index.ts"],
+			"@aletheics/zeno-protocol/*": ["./packages/protocol/src/*"],
+			"@aletheics/zeno-client": ["./packages/client/src/index.ts"],
+			"@aletheics/zeno-client/unix": ["./packages/client/src/unix.ts"],
+			"@aletheics/zeno-client/*": ["./packages/client/src/*"],
+			"@aletheics/zeno-server": ["./packages/server/src/index.ts"],
+			"@aletheics/zeno-server/unix": ["./packages/server/src/transports/unix/index.ts"],
+			"@aletheics/zeno-server/*": ["./packages/server/src/*"],
+			"typebox": ["./node_modules/typebox"],
+			"@aletheics/zeno-tui": ["./packages/tui/src/index.ts"],
+			"@aletheics/zeno-tui/*": ["./packages/tui/src/*"]
+		}
+	},
+	"include": ["packages/*/src/**/*", "packages/*/test/**/*", "packages/session-backends/*/src/**/*", "packages/session-backends/*/test/**/*", "packages/coding-agent/examples/**/*"],
+	"exclude": ["**/dist/**", "packages/coding-agent/examples/extensions/gondolin/**"]
+}

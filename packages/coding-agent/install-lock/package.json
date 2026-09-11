@@ -1,0 +1,15 @@
+{
+	"name": "@aletheics/zeno-coding-agent-install",
+	"version": "0.85.1",
+	"private": true,
+	"description": "Lockfile root used by the Pi installer and updater.",
+	"dependencies": {
+		"@aletheics/zeno-coding-agent": "0.85.1"
+	},
+	"overrides": {
+		"protobufjs": "7.6.6"
+	},
+	"engines": {
+		"node": ">=22.19.0"
+	}
+}
