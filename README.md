@@ -13,6 +13,20 @@ This is the home of the Zeno agent harness project including our self extensible
 * **[@aletheics/zeno-agent-core](packages/agent)**: Agent runtime with tool calling and state management
 * **[@aletheics/zeno-ai](packages/ai)**: Unified multi-provider LLM API (OpenAI, Anthropic, Google, …)
 
+## About this fork
+
+Zeno is a **fork of [pi](https://github.com/earendil-works/pi)**, a terminal AI agent harness.
+
+- **Original project**: pi — <https://github.com/earendil-works/pi>
+- **Original authors**: Mario Zechner and Earendil Works
+- **License**: MIT, Copyright (c) 2025 Mario Zechner. The original copyright notice is
+  retained unmodified in [LICENSE](LICENSE).
+- **This fork**: maintained by [aletheics](https://github.com/aletheics/zeno-cli)
+
+The fork rebrands the CLI, configuration directory, environment variables, npm package names
+and release artifacts from `pi` to `zeno`. Ecosystem contracts that third parties depend on
+are deliberately **unchanged** — see [AGENTS.md](AGENTS.md) for the list and the reasoning.
+
 ## All Packages
 
 | Package | Description |
