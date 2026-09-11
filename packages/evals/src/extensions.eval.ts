@@ -97,14 +97,14 @@ const ExtensionAuthoringJudge = createJudge<PiCodingAgentInput, ExtensionAuthori
 	},
 );
 
-const extensionHarnessTable = evalHarnessTable("Pi extension authoring system prompt", {
+const extensionHarnessTable = evalHarnessTable("Zeno extension authoring system prompt", {
 	baseline: createExtensionAuthoringHarness("system-prompt-without-docs", excludeGuidelinesAndDocumentation),
 	candidate: createExtensionAuthoringHarness("default-system-prompt", prepareDefaultPromptOverride),
 });
 
 describe.for(extensionHarnessTable)("$name", ({ harness }) => {
 	describeEval(
-		"Pi extension authoring system prompt",
+		"Zeno extension authoring system prompt",
 		{ harness, judges: [ExtensionAuthoringJudge], judgeThreshold: null },
 		(it) => {
 			it("creates, reloads, and uses a hello extension", async ({ run, task }) => {
@@ -112,7 +112,7 @@ describe.for(extensionHarnessTable)("$name", ({ harness }) => {
 					{
 						type: "prompt",
 						content:
-							"Create a Pi extension with a hello tool that takes a name and returns a greeting. For example, passing Bob should return `Hello, Bob!`.",
+							"Create a Zeno extension with a hello tool that takes a name and returns a greeting. For example, passing Bob should return `Hello, Bob!`.",
 					},
 					{ type: "reload" },
 					{
@@ -123,7 +123,7 @@ describe.for(extensionHarnessTable)("$name", ({ harness }) => {
 				]);
 				if (result.output.extensionSource !== null) {
 					const runId = result.artifacts?.runId;
-					if (typeof runId !== "string") throw new Error("Pi eval run did not record a run ID.");
+					if (typeof runId !== "string") throw new Error("Zeno eval run did not record a run ID.");
 					await recordEvalSourceArtifact(task, runId, {
 						name: "hello.ts",
 						contentType: "text/typescript",

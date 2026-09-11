@@ -141,7 +141,7 @@ export interface ActivateServerOptions {
 	readonly model?: string;
 }
 
-/** Ensure the selected logical server is reachable, launching the current Pi installation if needed. */
+/** Ensure the selected logical server is reachable, launching the current Zeno installation if needed. */
 export async function activateServer(options: ActivateServerOptions): Promise<ActivatedServer> {
 	if (options.provider !== undefined && options.model === undefined) {
 		throw new Error("Server model provider requires a model");
