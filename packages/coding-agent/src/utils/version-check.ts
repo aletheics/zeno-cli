@@ -1,4 +1,5 @@
 import { compare, valid } from "semver";
+import { isAmbientNetworkEnabled } from "../config.ts";
 import { fetchWithRetry } from "./management-http.ts";
 import { getZenoUserAgent } from "./zeno-user-agent.ts";
 
@@ -52,7 +53,7 @@ export async function getLatestPiRelease(
 	currentVersion: string,
 	options: { timeoutMs?: number; retry?: boolean } = {},
 ): Promise<LatestPiRelease | undefined> {
-	if (process.env.PI_OFFLINE) return undefined;
+	if (!isAmbientNetworkEnabled()) return undefined;
 
 	const response = await fetchWithRetry(
 		LATEST_VERSION_URL,

@@ -37,7 +37,7 @@ import {
 	type StreamOptions,
 } from "@aletheics/zeno-ai";
 import * as builtinProviderCatalog from "@aletheics/zeno-ai/providers/all";
-import { getAgentDir } from "../config.ts";
+import { getAgentDir, isAmbientNetworkEnabled } from "../config.ts";
 import { operationSignal, raceWithAbortSignal } from "../utils/abort.ts";
 import { AuthStorage as DefaultAuthStorage } from "./auth-storage.ts";
 import { ModelConfig } from "./model-config.ts";
@@ -193,7 +193,7 @@ export class ModelRuntime implements Models {
 			modelsPath,
 			modelsStore,
 			providers,
-			process.env.PI_OFFLINE === undefined,
+			isAmbientNetworkEnabled(),
 		);
 		runtime.configureRadiusProviders();
 		runtime.rebuildProviders();

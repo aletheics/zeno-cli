@@ -492,6 +492,30 @@ export function expandTildePath(path: string): string {
 	return normalizePath(path);
 }
 
+export function isTruthyEnvFlag(value: string | undefined): boolean {
+	if (value === undefined) return false;
+	return value === "1" || value.toLowerCase() === "true" || value.toLowerCase() === "yes";
+}
+
+/**
+ * Ambient network: requests zeno makes on its own rather than because you asked.
+ * That is the version check, the remote model catalog, and `fd`/`ripgrep`
+ * downloads.
+ *
+ * Zeno does not make a request you did not initiate, so this is **off by
+ * default**. Enable it with `--online` or `PI_ONLINE=1`.
+ *
+ * This is deliberately narrower than `PI_OFFLINE`. `PI_OFFLINE` (or `--offline`)
+ * is the blunt "no network at all" switch and also disables user-initiated
+ * package operations; it still forces ambient network off. Commands you type
+ * yourself — `zeno install`, `zeno update`, `/login`, `/share` — are never
+ * gated by this.
+ */
+export function isAmbientNetworkEnabled(): boolean {
+	if (isTruthyEnvFlag(process.env.PI_OFFLINE)) return false;
+	return isTruthyEnvFlag(process.env.PI_ONLINE);
+}
+
 const DEFAULT_SHARE_VIEWER_URL = "https://pi.dev/session/";
 
 /** Get the share viewer URL for a gist ID. */

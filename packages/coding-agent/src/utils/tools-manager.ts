@@ -4,18 +4,12 @@ import { arch, platform } from "os";
 import { join } from "path";
 import { Readable } from "stream";
 import { pipeline } from "stream/promises";
-import { APP_NAME, getBinDir } from "../config.ts";
+import { APP_NAME, getBinDir, isAmbientNetworkEnabled } from "../config.ts";
 import { fetchWithRetry } from "./management-http.ts";
 
 const TOOLS_DIR = getBinDir();
 const NETWORK_TIMEOUT_MS = 10_000;
 const DOWNLOAD_TIMEOUT_MS = 120_000;
-
-function isOfflineModeEnabled(): boolean {
-	const value = process.env.PI_OFFLINE;
-	if (!value) return false;
-	return value === "1" || value.toLowerCase() === "true" || value.toLowerCase() === "yes";
-}
 
 interface ToolConfig {
 	name: string;
@@ -358,7 +352,7 @@ export async function ensureTool(
 	const config = TOOLS[tool];
 	if (!config) return undefined;
 
-	if (isOfflineModeEnabled()) {
+	if (!isAmbientNetworkEnabled()) {
 		onStatus?.({
 			type: "warning",
 			message: `${config.name} not found on PATH. Install it to enable this tool, or run with --online to download it automatically.`,

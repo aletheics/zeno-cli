@@ -82,7 +82,7 @@ These variables are read by Zeno itself:
 | `ZENO_CODING_AGENT_SESSION_DIR` | Override session storage; overridden by `--session-dir` |
 | `PI_PACKAGE_DIR` | Override the package directory, useful for Nix/Guix store paths |
 | `PI_ONLINE` | Opt in to ambient network operations (version checks, remote model catalog, tool downloads). **Off by default** — see below |
-| `PI_OFFLINE` | Force ambient network operations off. This is already the default; set it to be explicit |
+| `PI_OFFLINE` | Disable **all** network operations, including the ones you trigger yourself (`install`, `update`). Ambient operations are already off by default; use this only when you want package commands to stay offline too |
 | `PI_SKIP_VERSION_CHECK` | Disable the latest-version request. Implied while ambient network is off |
 | `PI_TELEMETRY` | Override install/update telemetry and provider attribution headers: `1`/`true`/`yes` or `0`/`false`/`no`. Defaults to off |
 | `PI_CACHE_RETENTION` | Set to `long` for extended provider prompt caching where supported |
@@ -117,5 +117,5 @@ The full inventory of endpoints, with each one classified, lives in [`scripts/ne
 ```bash
 zeno --online          # allow ambient network for this run
 PI_ONLINE=1 zeno       # same, via the environment
-zeno --offline         # force ambient network off (already the default)
+zeno --offline         # no network at all, including package commands such as `zeno update`
 ```

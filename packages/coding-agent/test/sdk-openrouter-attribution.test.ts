@@ -92,9 +92,10 @@ describe("createAgentSession provider attribution headers", () => {
 		} = {},
 	): Promise<ProviderHeaders | undefined> {
 		const settingsManager = SettingsManager.create(cwd, agentDir);
-		if (options.telemetryEnabled === false) {
-			settingsManager.setEnableInstallTelemetry(false);
-		}
+		// Attribution headers are gated by the install-telemetry setting, which
+		// defaults to off. These tests exercise the feature, so opt in unless a
+		// test asks for the opted-out path.
+		settingsManager.setEnableInstallTelemetry(options.telemetryEnabled !== false);
 
 		const authStorage = AuthStorage.inMemory({
 			[model.provider]: { type: "api_key", key: "test-api-key" },

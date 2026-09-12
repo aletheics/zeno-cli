@@ -119,7 +119,10 @@ describe("ensureTool", () => {
 	});
 
 	it("surfaces the error cause chain when a download fails", async () => {
+		// Ambient network is off by default, so a download only happens when the
+		// user opts in with --online / PI_ONLINE=1.
 		delete process.env.PI_OFFLINE;
+		process.env.PI_ONLINE = "1";
 		const cause = new Error("connect ETIMEDOUT 140.82.113.3:443");
 		vi.stubGlobal(
 			"fetch",
