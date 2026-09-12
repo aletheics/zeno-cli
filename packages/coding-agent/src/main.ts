@@ -562,7 +562,16 @@ export interface MainOptions {
 export async function main(args: string[], options?: MainOptions) {
 	resetTimings();
 	const extensionFactories = [...builtInExtensions, ...(options?.extensionFactories ?? [])];
-	const offlineMode = args.includes("--offline") || isTruthyEnvFlag(process.env.PI_OFFLINE);
+	// Ambient network — version checks, the remote model catalog, and tool
+	// downloads — is off unless explicitly enabled. Zeno does not make a request
+	// the user did not initiate. Opt in with --online or PI_ONLINE=1; --offline
+	// or PI_OFFLINE=1 still force it off.
+	//
+	// Everything downstream (package-manager, tools-manager, model-runtime,
+	// version-check) already reads these two variables, so defaulting them here
+	// covers the whole tree in one place.
+	const onlineMode = args.includes("--online") || isTruthyEnvFlag(process.env.PI_ONLINE);
+	const offlineMode = !onlineMode || args.includes("--offline") || isTruthyEnvFlag(process.env.PI_OFFLINE);
 	if (offlineMode) {
 		process.env.PI_OFFLINE = "1";
 		process.env.PI_SKIP_VERSION_CHECK = "1";

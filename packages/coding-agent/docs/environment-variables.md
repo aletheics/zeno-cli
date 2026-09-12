@@ -81,9 +81,10 @@ These variables are read by Zeno itself:
 | `ZENO_CODING_AGENT_DIR` | Override the config directory; default is `~/.zeno/agent` |
 | `ZENO_CODING_AGENT_SESSION_DIR` | Override session storage; overridden by `--session-dir` |
 | `PI_PACKAGE_DIR` | Override the package directory, useful for Nix/Guix store paths |
-| `PI_OFFLINE` | Disable startup network operations, including update checks, package updates, and install/update telemetry |
-| `PI_SKIP_VERSION_CHECK` | Disable the `pi.dev` latest-version request |
-| `PI_TELEMETRY` | Override install/update telemetry and provider attribution headers: `1`/`true`/`yes` or `0`/`false`/`no` |
+| `PI_ONLINE` | Opt in to ambient network operations (version checks, remote model catalog, tool downloads). **Off by default** — see below |
+| `PI_OFFLINE` | Force ambient network operations off. This is already the default; set it to be explicit |
+| `PI_SKIP_VERSION_CHECK` | Disable the latest-version request. Implied while ambient network is off |
+| `PI_TELEMETRY` | Override install/update telemetry and provider attribution headers: `1`/`true`/`yes` or `0`/`false`/`no`. Defaults to off |
 | `PI_CACHE_RETENTION` | Set to `long` for extended provider prompt caching where supported |
 | `PI_SHARE_VIEWER_URL` | Override the base URL used by `/share` |
 | `PI_HARDWARE_CURSOR` | Set to `1` to show the hardware cursor; see [Terminal setup](terminal-setup.md) |
@@ -97,3 +98,24 @@ These variables are read by Zeno itself:
 Provider credentials such as `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, and cloud-provider configuration are listed in [Providers](providers.md#environment-variables-or-auth-file).
 
 `PI_SERVER_DIR` and `PI_SERVER_ID` apply only to the source-only [experimental remote harness](development.md#experimental-remote-harness), not distributed builds.
+
+## Network Access
+
+**Zeno does not make a network request you did not initiate.**
+
+Requests fall into two groups:
+
+| Group | When it happens | Default |
+|-------|-----------------|---------|
+| **User-initiated** | You send a message (model provider), run `/login`, `/share`, `update`, or download a model | Always allowed — these are the actions you asked for |
+| **Ambient** | Version check, remote model catalog, `fd`/`ripgrep` tool download | **Off** |
+
+Ambient requests stay off until you opt in with `--online` or `PI_ONLINE=1`. When a tool needs `fd` or `ripgrep` and they are not on `PATH`, Zeno reports what is missing and how to install it instead of fetching it.
+
+The full inventory of endpoints, with each one classified, lives in [`scripts/network-surface.json`](../scripts/network-surface.json) and is enforced by `npm run check:network-surface`. Adding an endpoint without classifying it fails CI.
+
+```bash
+zeno --online          # allow ambient network for this run
+PI_ONLINE=1 zeno       # same, via the environment
+zeno --offline         # force ambient network off (already the default)
+```

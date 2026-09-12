@@ -110,7 +110,8 @@ describe("ensureTool", () => {
 		expect(statuses).toEqual([
 			{
 				type: "warning",
-				message: "fd not found. Offline mode enabled, skipping download.",
+				message:
+					"fd not found on PATH. Install it to enable this tool, or run with --online to download it automatically.",
 			},
 		]);
 		expect(consoleLog).not.toHaveBeenCalled();

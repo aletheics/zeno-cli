@@ -359,7 +359,10 @@ export async function ensureTool(
 	if (!config) return undefined;
 
 	if (isOfflineModeEnabled()) {
-		onStatus?.({ type: "warning", message: `${config.name} not found. Offline mode enabled, skipping download.` });
+		onStatus?.({
+			type: "warning",
+			message: `${config.name} not found on PATH. Install it to enable this tool, or run with --online to download it automatically.`,
+		});
 		return undefined;
 	}
 

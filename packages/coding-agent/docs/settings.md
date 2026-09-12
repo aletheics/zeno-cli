@@ -57,7 +57,7 @@ Use `/trust` in interactive mode to save a project trust decision for future ses
 | `quietStartup` | boolean | `false` | Hide startup header |
 | `defaultProjectTrust` | string | `"ask"` | Fallback project trust behavior: `"ask"`, `"always"`, or `"never"`. Global setting only |
 | `collapseChangelog` | boolean | `false` | Show condensed changelog after updates |
-| `enableInstallTelemetry` | boolean | `true` | Send the anonymous install/update ping and selected provider attribution headers. This does not control update checks |
+| `enableInstallTelemetry` | boolean | `false` | Opt in to sending the anonymous install/update ping and selected provider attribution headers. Zeno sends nothing unless you enable this |
 | `enableAnalytics` | boolean | `false` | Opt-in analytics data sharing. Currently only asked for during the experimental first-time setup (`PI_EXPERIMENTAL=1`) |
 | `trackingId` | string | - | Analytics tracking identifier, generated when `enableAnalytics` is turned on |
 | `doubleEscapeAction` | string | `"tree"` | Action for double-escape: `"tree"`, `"fork"`, or `"none"` |
@@ -83,7 +83,7 @@ For VS Code, include `--wait` so zeno resumes after the editor exits:
 
 `enableInstallTelemetry` controls the anonymous install/update ping to `https://pi.dev/api/report-install` and Zeno attribution headers for OpenRouter, NVIDIA NIM, and Cloudflare provider requests. Opting out disables both. It does not disable update checks; Zeno can still fetch `https://pi.dev/api/latest-version` to look for the latest version.
 
-Set `PI_SKIP_VERSION_CHECK=1` to disable the Zeno version update check. Use `--offline` or `PI_OFFLINE=1` to disable all startup network operations described here, including update checks, package update checks, and install/update telemetry.
+Ambient network operations described here are **off by default**: Zeno does not make a request you did not initiate. Enable them with `--online` or `PI_ONLINE=1`. `--offline` or `PI_OFFLINE=1` forces them off and wins over `--online`.
 
 ### Network
 
