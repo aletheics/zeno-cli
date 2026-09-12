@@ -1,0 +1,356 @@
+{
+	"categories": {
+		"provider": "Model provider endpoint. Contacted only for providers the user configured, and only when they send a message.",
+		"oauth": "OAuth/login endpoint. Contacted only when the user runs /login for that provider.",
+		"user-action": "Contacted only in response to an explicit user command.",
+		"local": "Localhost / loopback.",
+		"reference": "URL appears in comments, error text, or help output. Never fetched.",
+		"dynamic": "Template host built at runtime. Cannot be allowlisted by name; review when it changes.",
+		"unsolicited": "FIRES WITHOUT USER ACTION. This is the list the fork exists to shrink."
+	},
+	"hosts": {
+		"127.0.0.1": {
+			"category": "local",
+			"files": [
+				"packages/coding-agent/src/extensions/llama/provider.ts"
+			]
+		},
+		"<dynamic> api.${...}": {
+			"category": "dynamic",
+			"files": [
+				"packages/ai/src/auth/oauth/github-copilot.ts"
+			]
+		},
+		"<dynamic> copilot-api.${...}": {
+			"category": "dynamic",
+			"files": [
+				"packages/ai/src/auth/oauth/github-copilot.ts"
+			]
+		},
+		"ai-gateway.vercel.sh": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/vercel-ai-gateway.ts"
+			]
+		},
+		"api.ant-ling.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/ant-ling.ts"
+			]
+		},
+		"api.anthropic.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/anthropic.ts"
+			]
+		},
+		"api.cerebras.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/cerebras.ts"
+			]
+		},
+		"api.cloudflare.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/api/cloudflare.ts"
+			]
+		},
+		"api.deepseek.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/deepseek.ts"
+			]
+		},
+		"api.fireworks.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/fireworks.ts"
+			]
+		},
+		"api.groq.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/groq.ts"
+			]
+		},
+		"api.individual.githubcopilot.com": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/github-copilot.ts",
+				"packages/ai/src/providers/github-copilot.ts"
+			]
+		},
+		"api.kimi.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/kimi-coding.ts"
+			]
+		},
+		"api.minimax.io": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/minimax.ts"
+			]
+		},
+		"api.minimaxi.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/minimax-cn.ts"
+			]
+		},
+		"api.mistral.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/mistral.ts"
+			]
+		},
+		"api.moonshot.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/moonshotai.ts"
+			]
+		},
+		"api.moonshot.cn": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/moonshotai-cn.ts"
+			]
+		},
+		"api.openai.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/api/openai-codex-responses.ts",
+				"packages/ai/src/auth/oauth/openai-codex.ts",
+				"packages/ai/src/providers/openai.ts"
+			]
+		},
+		"api.together.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/together.ts"
+			]
+		},
+		"api.x.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/xai.ts"
+			]
+		},
+		"api.xiaomimimo.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/xiaomi.ts"
+			]
+		},
+		"api.z.ai": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/zai.ts"
+			]
+		},
+		"auth.kimi.com": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/kimi-coding.ts"
+			]
+		},
+		"auth.openai.com": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/openai-codex.ts"
+			]
+		},
+		"auth.x.ai": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/xai.ts"
+			]
+		},
+		"chatgpt.com": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/api/openai-codex-responses.ts",
+				"packages/ai/src/providers/openai-codex.ts"
+			]
+		},
+		"claude.ai": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/anthropic.ts",
+				"packages/coding-agent/src/modes/interactive/interactive-mode.ts"
+			]
+		},
+		"cli.github.com": {
+			"category": "reference",
+			"files": [
+				"packages/coding-agent/src/modes/interactive/session-share.ts"
+			]
+		},
+		"cloud.google.com": {
+			"category": "reference",
+			"files": [
+				"packages/ai/src/providers/google-vertex.ts"
+			]
+		},
+		"docs.aws.amazon.com": {
+			"category": "reference",
+			"files": [
+				"packages/ai/src/api/bedrock-converse-stream.ts",
+				"packages/ai/src/providers/amazon-bedrock.ts"
+			]
+		},
+		"gateway.ai.cloudflare.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/api/cloudflare.ts"
+			]
+		},
+		"generativelanguage.googleapis.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/google.ts"
+			]
+		},
+		"git-scm.com": {
+			"category": "reference",
+			"files": [
+				"packages/agent/src/harness/env/nodejs.ts",
+				"packages/coding-agent/src/utils/shell.ts"
+			]
+		},
+		"github.com": {
+			"category": "unsolicited",
+			"files": [
+				"packages/coding-agent/src/config.ts",
+				"packages/coding-agent/src/core/system-prompt.ts",
+				"packages/coding-agent/src/migrations.ts",
+				"packages/coding-agent/src/package-manager-cli.ts",
+				"packages/coding-agent/src/utils/changelog.ts",
+				"packages/coding-agent/src/utils/tools-manager.ts"
+			]
+		},
+		"huggingface.co": {
+			"category": "user-action",
+			"files": [
+				"packages/coding-agent/src/extensions/llama/huggingface.ts",
+				"packages/coding-agent/src/extensions/llama/index.ts"
+			]
+		},
+		"inference.baseten.co": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/baseten.ts"
+			]
+		},
+		"integrate.api.nvidia.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/nvidia.ts"
+			]
+		},
+		"mariozechner.at": {
+			"category": "reference",
+			"files": [
+				"packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts"
+			]
+		},
+		"mistral.ai": {
+			"category": "reference",
+			"files": [
+				"packages/coding-agent/src/modes/interactive/components/daxnuts.ts"
+			]
+		},
+		"open.bigmodel.cn": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/zai-coding-cn.ts"
+			]
+		},
+		"openrouter.ai": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/openrouter.ts",
+				"packages/ai/src/image-models.generated.ts",
+				"packages/ai/src/providers/openrouter.ts"
+			]
+		},
+		"pi.dev": {
+			"category": "unsolicited",
+			"files": [
+				"packages/coding-agent/src/cli/args.ts",
+				"packages/coding-agent/src/config.ts",
+				"packages/coding-agent/src/core/provider-attribution.ts",
+				"packages/coding-agent/src/core/remote-catalog-provider.ts",
+				"packages/coding-agent/src/modes/interactive/interactive-mode.ts",
+				"packages/coding-agent/src/package-manager-cli.ts",
+				"packages/coding-agent/src/utils/version-check.ts"
+			]
+		},
+		"platform.claude.com": {
+			"category": "oauth",
+			"files": [
+				"packages/ai/src/auth/oauth/anthropic.ts"
+			]
+		},
+		"radius.pi.dev": {
+			"category": "user-action",
+			"files": [
+				"packages/ai/src/providers/radius-config.ts"
+			]
+		},
+		"router.huggingface.co": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/huggingface.ts"
+			]
+		},
+		"token-plan-ams.xiaomimimo.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/xiaomi-token-plan-ams.ts"
+			]
+		},
+		"token-plan-cn.xiaomimimo.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/xiaomi-token-plan-cn.ts"
+			]
+		},
+		"token-plan-sgp.xiaomimimo.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/xiaomi-token-plan-sgp.ts"
+			]
+		},
+		"token-plan.ap-southeast-1.maas.aliyuncs.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/qwen-token-plan-individual.ts",
+				"packages/ai/src/providers/qwen-token-plan.ts"
+			]
+		},
+		"token-plan.cn-beijing.maas.aliyuncs.com": {
+			"category": "provider",
+			"files": [
+				"packages/ai/src/providers/qwen-token-plan-cn.ts"
+			]
+		},
+		"www.w3.org": {
+			"category": "reference",
+			"files": [
+				"packages/ai/src/auth/oauth/oauth-page.ts"
+			]
+		}
+	},
+	"primitives": [
+		"fetch(",
+		"fetchWithRetry(",
+		"from \"node:http\"",
+		"from \"node:https\"",
+		"from \"node:net\"",
+		"import(\"node:http\")",
+		"new WebSocket("
+	]
+}
