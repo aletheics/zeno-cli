@@ -134,7 +134,15 @@ const unsolicited = Object.entries(inventory.hosts ?? {})
 	.filter(([, meta]) => meta.category === "unsolicited")
 	.map(([host]) => host);
 
+const ambientOptIn = Object.entries(inventory.hosts ?? {})
+	.filter(([, meta]) => meta.category === "ambient-opt-in")
+	.map(([host]) => host);
+
 console.log(`Network surface: ${foundHosts.size} hosts, ${foundPrimitives.size} primitives.`);
 if (unsolicited.length > 0) {
-	console.log(`  ${unsolicited.length} classified unsolicited (fires without user action): ${unsolicited.join(", ")}`);
+	console.log(`  ${unsolicited.length} UNSOLICITED (fires without user action): ${unsolicited.join(", ")}`);
+	console.log("  This should be empty. Either gate it behind ambient network or reclassify with --update.");
+}
+if (ambientOptIn.length > 0) {
+	console.log(`  ${ambientOptIn.length} ambient, opt-in only (--online / PI_ONLINE=1): ${ambientOptIn.join(", ")}`);
 }

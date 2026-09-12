@@ -6,7 +6,7 @@
 		"local": "Localhost / loopback.",
 		"reference": "URL appears in comments, error text, or help output. Never fetched.",
 		"dynamic": "Template host built at runtime. Cannot be allowlisted by name; review when it changes.",
-		"unsolicited": "FIRES WITHOUT USER ACTION. This is the list the fork exists to shrink."
+		"ambient-opt-in": "Fires on its own, but only when ambient network is enabled (--online / PI_ONLINE=1). Off by default."
 	},
 	"hosts": {
 		"127.0.0.1": {
@@ -221,7 +221,7 @@
 			]
 		},
 		"github.com": {
-			"category": "unsolicited",
+			"category": "ambient-opt-in",
 			"files": [
 				"packages/coding-agent/src/config.ts",
 				"packages/coding-agent/src/core/system-prompt.ts",
@@ -250,18 +250,6 @@
 				"packages/ai/src/providers/nvidia.ts"
 			]
 		},
-		"mariozechner.at": {
-			"category": "reference",
-			"files": [
-				"packages/coding-agent/src/modes/interactive/components/earendil-announcement.ts"
-			]
-		},
-		"mistral.ai": {
-			"category": "reference",
-			"files": [
-				"packages/coding-agent/src/modes/interactive/components/daxnuts.ts"
-			]
-		},
 		"open.bigmodel.cn": {
 			"category": "provider",
 			"files": [
@@ -277,7 +265,7 @@
 			]
 		},
 		"pi.dev": {
-			"category": "unsolicited",
+			"category": "ambient-opt-in",
 			"files": [
 				"packages/coding-agent/src/cli/args.ts",
 				"packages/coding-agent/src/config.ts",
