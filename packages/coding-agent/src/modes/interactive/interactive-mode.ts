@@ -52,6 +52,7 @@ import {
 	getAuthPath,
 	getDebugLogPath,
 	getDocsPath,
+	isAmbientNetworkEnabled,
 	VERSION,
 } from "../../config.ts";
 import { type AgentSession, type AgentSessionEvent, parseSkillBlock } from "../../core/agent-session.ts";
@@ -1041,12 +1042,17 @@ export class InteractiveMode {
 				.finally(() => clearTimeout(timeout));
 		}
 
-		// Start version check asynchronously
-		checkForNewPiVersion(this.version).then((newRelease) => {
-			if (newRelease) {
-				this.showNewVersionNotification(newRelease);
-			}
-		});
+		// Start version check asynchronously. This is an ambient request — it
+		// fires on startup whether or not you asked for anything — so it stays
+		// off until you opt in with --online / PI_ONLINE=1. `zeno update --self`
+		// still checks on demand: that one you initiated.
+		if (isAmbientNetworkEnabled()) {
+			checkForNewPiVersion(this.version).then((newRelease) => {
+				if (newRelease) {
+					this.showNewVersionNotification(newRelease);
+				}
+			});
+		}
 
 		// Start package update check asynchronously
 		this.checkForPackageUpdates()
@@ -1139,7 +1145,9 @@ export class InteractiveMode {
 	}
 
 	private async checkForPackageUpdates(): Promise<string[]> {
-		if (process.env.PI_OFFLINE) {
+		// Ambient: runs on startup without being asked for. See the version check
+		// above for the same reasoning.
+		if (!isAmbientNetworkEnabled()) {
 			return [];
 		}
 

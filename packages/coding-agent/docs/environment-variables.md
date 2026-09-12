@@ -108,7 +108,9 @@ Requests fall into two groups:
 | Group | When it happens | Default |
 |-------|-----------------|---------|
 | **User-initiated** | You send a message (model provider), run `/login`, `/share`, `update`, or download a model | Always allowed — these are the actions you asked for |
-| **Ambient** | Version check, remote model catalog, `fd`/`ripgrep` tool download | **Off** |
+| **Ambient** | Version check, package update check, install telemetry, `fd`/`ripgrep` tool download | **Off** |
+
+Refreshing a provider's model list is **not** ambient — it runs when you ask for models, so it is always allowed. The line is drawn at *who started it*, not at which endpoint is contacted.
 
 Ambient requests stay off until you opt in with `--online` or `PI_ONLINE=1`. When a tool needs `fd` or `ripgrep` and they are not on `PATH`, Zeno reports what is missing and how to install it instead of fetching it.
 
